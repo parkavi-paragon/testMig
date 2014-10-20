@@ -1,4 +1,13 @@
 Testparkavi::Application.routes.draw do
+  resources :centers
+
+
+  resources :users
+
+
+  resources :posts
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
