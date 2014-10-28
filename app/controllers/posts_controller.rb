@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
          p 5555555555555555555555555
+p 4444444444444444444444444
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
