@@ -45,26 +45,15 @@ class ApplicationController < ActionController::Base
     redirect_to geocode_url(:address => Company.first.location)
   end
 
-  def nearby_centers
-    service_centers = []
-    service_centers_list = ServiceCenter.where("geo_lat is not null and geo_long is not null")
-    service_centers_list.each do |center|
-      service_center = []
-      service_center.push("\"center_code\":\"#{center.center_code}\"")
-      service_center.push("\"center_name\":\"#{center.center_name}\"")
-      service_center.push("\"address\":\"#{(center.address1.to_s + " " + center.address2.to_s).strip}\"")
-      service_center.push("\"city\":\"#{center.city}\"")
-      service_center.push("\"state\":\"#{center.state}\"")
-      service_center.push("\"latitude\":#{center.geo_lat}")
-      service_center.push("\"longitude\":#{center.geo_long}")
-      service_center.push("\"distance\":#{center.distance_from([params[:lat], params[:long]]).round(2)}")
-      service_centers.push("{" + service_center.join(",") + "}")
-    end
-    render :text => "[" + service_centers.join(",") + "]"
-  end
 
   def distance_between(point_a, point_b)
-    Geocoder::Calculations.distance_between(
+ Photo.create(
+        :photo_name => params[:photo_name],
+        :photo_thumbnail_name => params[:photo_thumbnail_name],
+        :source_entity => params[:source_entity],
+        :entity_id => params[:entity_id]
+    )   
+ Geocoder::Calculations.distance_between(
         [point_a.geo_lat, point_a.geo_long],
         [point_b.geo_lat, point_b.geo_long]
     ).round(2)
