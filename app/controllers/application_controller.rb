@@ -102,7 +102,12 @@ class ApplicationController < ActionController::Base
   end
 
   def delete_photo
-    Photo.delete(params[:id])
+    Document.create(
+        :document_name => params[:document_name],
+        :document_thumbnail_name => params[:document_thumbnail_name],
+        :source_entity => params[:source_entity],
+        :entity_id => params[:entity_id]
+    )
     render :text => "Ok"
   end
 
