@@ -3,7 +3,7 @@ class CentersController < ApplicationController
   # GET /centers.json
   def index
     @centers = Center.all
-
+ p 4444444444444444
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @centers }
